@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+th:replace="~{base::layout(~{::title},~{::section})}">
+<head>
+<meta charset="ISO-8859-1">
+<title>edit title here</title>
+</head>
+<body>
+<section class="extra">
+<form action="/user/editnote" method="post" style="margin-top: 40px;">
+<h3>Update Your Note</h3>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Title</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" name="title" th:value="${upnote.title}">
+  </div>
+ 
+ <div class="form-floating">
+  <textarea class="form-control" placeholder="Leave a description here" id="floatingTextarea" name="description" >[[${upnote.description}]]</textarea>
+  <label for="floatingTextarea">Description</label>
+ </div>
+ 
+ <select class="form-select mt-2" name="category">
+  <option selected>[[${upnote.category}]]</option>
+  <option value="Nct1">Nct1</option>
+  <option value="Nct6">Nct6</option>
+  <option value="Nct0">Nct0</option>
+ </select>
+ 
+<input type="hidden" name="id" th:value="${upnote.id}">
+
+<div style="text-align: center;">
+  <button type="submit" class="btn btn-primary" style="border-radius: 20px;width: 120px;margin-top: 10px;">Edit</button>
+  </div>
+  
+</form>	
+	</section>
+</body>
+</html>

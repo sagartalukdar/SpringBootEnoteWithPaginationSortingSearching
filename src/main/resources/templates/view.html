@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+th:replace="~{base::layout(~{::title},~{::section})}">
+<head>
+<meta charset="ISO-8859-1">
+<title>view title</title>
+</head>
+<body>
+<section>
+	
+	<th:block th:if="${session.msg}">
+		<p class="fs-3 mt-2 text-center text-success">[[${session.msg}]]</p>
+		<th:block th:text="${@userServiceimpl.removeMessage()}"></th:block>
+	</th:block>
+	
+<div class="log">
+	<form action="/user/sort" method="post" class="sorting">
+
+<select class="form-select" name="category">
+  <option selected value="default">Sort by Category</option>
+  <option value="Nct1">Nct1</option>
+  <option value="Nct6">Nct6</option>
+  <option value="Nct0">Nct0</option>
+</select>
+    <input type="date" class="form-control" name="notedate">
+    <button type="submit" class="btn btn-primary">Sort<i class="fa-solid fa-arrow-down-short-wide fa-lg" style="color: #f1f4f8;"></i></button>
+   
+    </form>
+</div>	
+	
+	<div class="log boc" th:each="e:${notelist}">
+		<div class="sym"><img src="/img/images.png" width="100px" height="80px">
+		</div>
+	
+	<div class="text shadow p-3 mb-3 bg-body rounded">	
+		<p class="fw-bold">[[${e.title}]]</p>
+		<p>[[${e.description}]]</p>
+		<p>Created :<span class="fw-bold text-primary"> [[${e.date}]]</span></p>
+		<p>Category: [[${e.category}]]</p>	 
+	</div>
+	
+	<div class="butt ">
+	<a class="btn btn-sm btn-warning" th:href="@{'edit/'+${e.id}}"><i class="fa-regular fa-edit fa-lg" style="color:black"></i>&nbspEdit</a>
+    <a class="btn btn-sm btn-danger" th:href="@{'delete/'+${e.id}}"><i class="fa-solid fa-trash-can fa-lg" style="color: #e8ecf2;"></i>&nbspDelete</a>
+	</div>
+	
+	</div>
+	
+	<div class="log">
+	<p>current page:[[${pageno}]]</p>
+	<p>Total Elements: [[${totalelements}]]</p>
+	<p>Total Pages: [[${totalpages}]]</p>
+	
+	<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li th:if="${pageno!=0}"class="page-item">
+		<a class="page-link" th:href="@{'/user/page/'+${pageno-1}+'?sortfield='+${sf}+'&sortdir='+${sd}}">Previous</a>
+	</li>
+	
+    <li th:each="e:${#numbers.sequence(1,totalpages)}" th:classappend="${(pageno==e-1)?'active':''}" class="page-item">
+		<a class="page-link" th:href="@{'/user/page/'+${e-1}+'?sortfield='+${sf}+'&sortdir='+${sd}}">[[${e}]]</a>
+	</li>
+    
+    <li th:if="${pageno!=totalpages-1}"class="page-item">
+		<a class="page-link" th:href="@{'/user/page/'+${pageno+1}}+'?sortfield='+${sf}+'&sortdir='+${sd}">Next</a>
+	</li>
+  </ul>
+   </nav>
+	
+	</div>
+	
+</section>
+</body>
+</html>

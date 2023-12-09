@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+th:replace="~{base::layout(~{::title},~{::section})}">
+<head>
+<meta charset="ISO-8859-1">
+<title>register title</title>
+</head>
+
+<body>
+	<section class="extra">
+		<div >
+<h2 style="text-align: center;">Registration</h2>
+<th:block th:if="${session.msg}">
+	<p class="fs-5 text-center text-success">[[${session.msg}]]</p>
+   <th:block th:text="${@userServiceimpl.removeMessage()}"></th:block>
+</th:block>
+  <p >Allready have an account ?<a href="loginpage" style="color: brown;"> Please Login</a></p>
+<form action="userregister" method="post">
+   <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label"></label>
+    <input type="text" class="form-control" id="exampleInputPassword1" name="fullname" placeholder="Full Name">
+  </div>
+   <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label"></label>
+    <input type="text" class="form-control" id="exampleInputPassword1" name="qualification" placeholder="qualification">
+  </div>
+  
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label"></label>
+    <input type="email" class="form-control" id="exampleInputEmail1" name="email" placeholder="Email address">
+  </div>
+   <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label"></label>
+    <input type="text" class="form-control" id="exampleInputPassword1" name="address" placeholder="Address">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label"></label>
+    <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="password">
+  </div>
+    
+   <div class="mb-3">
+   <label>gender</label>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" id="inlineCheckbox1" name="gender" value="male">
+  <label class="form-check-label" for="inlineCheckbox1">Male</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" id="inlineCheckbox2" name="gender" value="female">
+  <label class="form-check-label" for="inlineCheckbox2">Female</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" id="inlineCheckbox3" name="gender" value="other" >
+  <label class="form-check-label" for="inlineCheckbox3">other</label>
+</div>
+  </div>
+  
+   <div class="mb-3">
+    <label for="example" class="form-label"></label>
+    <input type="text" class="form-control" id="example" name="phoneno" placeholder="Phone Number">
+  </div>
+  
+<div style="text-align: center;">
+  <button type="submit" class="btn btn-primary" style="border: 2px solid black;border-radius: 20px;width: 120px;">Register</button>
+  </div>
+
+
+</form>
+
+</div>
+	</section>
+
+</body>
+</html>
